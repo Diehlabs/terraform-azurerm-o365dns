@@ -7,6 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const mx_record_value = "terratest-diehlabs-com.mail.protection.outlook.com"
+
 func TestMyModule(t *testing.T) {
 	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -17,6 +19,6 @@ func TestMyModule(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	output := terraform.Output(t, terraformOptions, "hello_world")
-	assert.Equal(t, "Hello, World!", output)
+	output := terraform.Output(t, terraformOptions, "mx_record")
+	assert.Equal(t, mx_record_value, output)
 }
